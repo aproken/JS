@@ -1,7 +1,9 @@
-let lang = prompt('Выберете язык: ru или en', 'ru'),
-    days = {
-        ru: ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'],
-        en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    };
+let namePerson = prompt('Выберете имя:', 'Артём'),
+    statusName = {
+      'Артём': 'директор',
+      'Максим': 'преподаватель',
+    }
 
-alert(days[lang]);
+alert(
+  (namePerson in statusName) ? statusName[namePerson] : 'студент'
+);    
