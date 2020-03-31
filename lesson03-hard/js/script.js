@@ -1,15 +1,7 @@
-let lang = prompt('Выберете язык: ru или en', 'ru');
-    daysRu = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'],
-    daysEn = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+let lang = prompt('Выберете язык: ru или en', 'ru'),
+    days = {
+        ru: ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'],
+        en: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    };
 
-switch(lang) {
-  case 'ru':
-    alert(daysRu);
-    break;
-  case 'en': 
-    alert(daysEn);
-    break;
-  default: 
-    alert('Выберете ru или en');
-}
-
+alert(days[lang]);
