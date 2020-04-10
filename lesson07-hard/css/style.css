@@ -1,0 +1,15 @@
+html {
+  font-size: 15px;
+}
+
+body {
+  background-color: #6BAFDE;
+}
+
+.holiday__day{
+  font-style: italic;
+}
+
+.now__day {
+  font-weight: bold;
+}
