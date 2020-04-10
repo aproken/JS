@@ -18,28 +18,27 @@ let money = start(),
     budgetMonth: 0,
     expensesMonth: 0,
     asking: function() {
+      let expensesName,
+          expensesAmount;
+      
       appData.addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', 'Интернет, транспорт, квартплата, еда, здоровье')
                             .toLowerCase()
                             .split(',')
                             .map(item => item.trim())
                             .map(item => ucFirst(item));
       appData.deposit = confirm('Есть ли у вас депозит в банке?');
-      appData.expenses = appData.getExpensesUser(2);
-    },
 
-    //Функция спрашивает у пользователя обязательные разсходы
-    getExpensesUser: function(count) {
-      let obj = {},
-          index = 0,
-          key;
-      while (index != count) {
-        key = prompt('Введите обязательную статью расходов?');
-        while (!isNumber(obj[key])) {
-          obj[key] = (parseInt(prompt('Во сколько это обойдется?')));
+      for(let i = 0; i < 2; i ++) {
+        do {
+          expensesName = prompt('Введите обязательную статью расходов?');
         }
-        index++;
+        while (!isStr(expensesName));
+        do {
+          expensesAmount = parseInt(prompt('Во сколько обойдется' + ' ' + expensesName + '?', 1000));
+        }
+        while (!isNumber(expensesAmount));
+        appData.expenses[expensesName] = expensesAmount;
       }
-      return obj;
     },
 
     //Функция возвращает сумму всех обязательных расходов за месяц
@@ -55,8 +54,8 @@ let money = start(),
 
     //Подсчитывает за какой период будет достигнута цель
     getTargetMonth: function() {
-      if (appData.mission / appData.expensesMonth > 0) {
-        return 'Цель будет достигнута за ' + Math.ceil(appData.mission / appData.expensesMonth) + ' месяцев';
+      if (appData.mission / appData.budgetMonth > 0) {
+        return 'Цель будет достигнута за ' + Math.ceil(appData.mission / appData.budgetMonth) + ' месяцев';
       } else {
         return 'Цель не будет достигнута';
       }
@@ -81,9 +80,15 @@ appData.expensesMonth = appData.getExpensesMonth(Object.values(appData.expenses)
 appData.getBudget();
 appData.getTargetMonth();
 
-
+//Функция проверяет является цифрой
 function isNumber(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+//Функция проверяет является буквой или нет
+function isStr(str) {
+  let reg = /^[a-zA-Zа-яА-Я ,]+$/;
+  return reg.test(str)
 }
 
 //Функция делает первую букву заглавной
