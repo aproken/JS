@@ -12,6 +12,8 @@ function getArgument(n) {
 
   if (n.length > 30) {
     return n.slice(0, 31) + '...';
+  } else {
+    return str;
   }
 }
 
