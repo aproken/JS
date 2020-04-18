@@ -167,12 +167,12 @@ return str[0].toUpperCase() + str.slice(1);
 
 //Функция
 function start() {
-let m;
-do {
-m = parseInt(prompt('Ваш месячный доход?', 60000));
-} 
-while (!isNumber(m) || m === '' || m === null);
-return m;
+  let m;
+  do {
+  m = parseInt(prompt('Ваш месячный доход?', 60000));
+  } 
+  while (!isNumber(m) || m === '' || m === null);
+  return m;
 };  
 
 console.log('Наша программа включает в себя данные: ');
