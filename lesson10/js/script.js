@@ -21,3 +21,6 @@ liBook6[9].insertAdjacentHTML('beforebegin', '<li>Глава 8: За преде�
 
 //Убрать рекламу со страницы
 document.querySelector('.adv').style.display = 'none';
+
+//Заменить картинку заднего фона
+document.body.style.background = "url(./image/you-dont-know-js.jpg)"
