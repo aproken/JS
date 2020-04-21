@@ -148,10 +148,10 @@ let appData = {
       //Получить возможные расходы
       getAddExpenses: function() {
       
-        if ((additionalExpensesItem.value !== '') && (!isStr(additionalExpensesItem.value))) {
-          alert('В поле "Возможные расходы" используйте буквы русского алфавита!');
-          return;
-        }
+        // if ((additionalExpensesItem.value !== '') && (!isStr(additionalExpensesItem.value))) {
+        //   alert('В поле "Возможные расходы" используйте буквы русского алфавита!');
+        //   return;
+        // }
 
         if (additionalExpensesItem.value !== '') {
           appData.addExpenses = additionalExpensesItem.value
@@ -245,7 +245,9 @@ periodSelect.addEventListener('input', function(e) {
 
 //Функция проверяет является цифрой
 function isNumber(n) {
-return !isNaN(parseFloat(n)) && isFinite(n);
+// return !isNaN(parseFloat(n)) && isFinite(n);
+  return Boolean(n.match(/^\d+$/)
+  )
 }
 
 //Функция проверяет является буквой или нет
@@ -275,10 +277,6 @@ function consolePrint() {
   for (let key in appData.income) {
     console.log( "Ключ: " + key + " значение: " + appData.income[key]);
   }
-  
-//Функция валидации полей
-
-
 
   console.log('Обязательные расходы: ');
   for (let key in appData.expenses) {
@@ -288,4 +286,26 @@ function consolePrint() {
   console.log(appData.getTargetMonth());
   console.log(appData.getStatusIncome());
 }
+
+//Функция валидации полей
+let inputName = document.querySelectorAll('input[placeholder = "Наименование"]'),
+    inputAmount = document.querySelectorAll('input[placeholder = "Сумма"]');
+
+inputName.forEach(item => {
+  item.addEventListener('input', function(e) {
+    if ((e.target.value !== '') && (!isStr(e.target.value))) {
+      alert ('В данном поле допустимы только буквы русского алфавита!');
+      e.target.value = e.target.value.replace(/[^а-яА-Я ,]+$/g, '')
+    }
+  })
+})
+
+inputAmount.forEach(item => {
+  item.addEventListener('input', function(e) {
+    if ((e.target.value !== '') && (!isNumber(e.target.value))) {
+      alert ('В данном поле допустимы только цифры!');
+      e.target.value = e.target.value.replace(/[^\d]+$/g, '')
+    }
+  })
+})
 
