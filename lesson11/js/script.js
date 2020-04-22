@@ -135,7 +135,7 @@ let appData = {
 
       //Получить возможные доходы
       getAddIncome: function() {
-        if (additionalIncomeItem !== '') {
+        if (additionalIncomeItem[0].value !== '') {
           appData.addIncome = Object.values(additionalIncomeItem)
                             .map(item => item.value)
                             .map(item => item.trim())
@@ -143,15 +143,13 @@ let appData = {
                             .map(item => ucFirst(item))
                             .join(', ');
         }
+        else {
+          return appData.addIncome = 'В этом месяце нет';
+        }
       },
       
       //Получить возможные расходы
       getAddExpenses: function() {
-      
-        // if ((additionalExpensesItem.value !== '') && (!isStr(additionalExpensesItem.value))) {
-        //   alert('В поле "Возможные расходы" используйте буквы русского алфавита!');
-        //   return;
-        // }
 
         if (additionalExpensesItem.value !== '') {
           appData.addExpenses = additionalExpensesItem.value
@@ -161,6 +159,9 @@ let appData = {
                               .map(item => ucFirst(item))
                               .join(', ');
         }
+        else {
+          return appData.addExpenses = 0;
+        }
       },
 
       //Получение
@@ -169,6 +170,9 @@ let appData = {
       getExpensesMonth: function(expenses) {
         if (expenses.length !== 0) {
           appData.expensesMonth = expenses.reduce((accume, current) => accume + current);
+        }
+        else {
+          return appData.expensesMonth = 0;
         }
       },
 
@@ -190,7 +194,7 @@ let appData = {
         if (targetAmount.value / appData.budgetMonth > 0) {
           return Math.ceil(targetAmount.value / appData.budgetMonth) + ' месяцев';
         } else {
-          return;
+          return 'Цель - сумма накоплений не выбрана';
         }
       }, // Конец функция getTargetMonth
 
