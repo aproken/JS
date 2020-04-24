@@ -1,6 +1,7 @@
 'use strict'
 
 let buttonStart = document.getElementById('start'),
+    buttonCansel = document.getElementById('cancel'),
     buttonPlus = document.getElementsByTagName('button'),
     buttonIncomeAdd = buttonPlus[0],
     buttonExpensesAdd = buttonPlus[1],
@@ -64,7 +65,7 @@ let appData = {
         
         //Месячный доход        
         this.budget = parseInt(salaryAmount.value);
-
+        console.log('this ', this);
         this.getIncomes();
         this.getExpenses();
         this.getAddExpenses();
@@ -87,7 +88,7 @@ let appData = {
         incomePeriodValue.value = this.calcSaveMoney();
 
         periodSelect.addEventListener('input', function(e) {
-          incomePeriodValue.value = e.target.value * this.budget;
+          incomePeriodValue.value = e.target.value * appData.budget;
         })
       },
 
@@ -95,10 +96,10 @@ let appData = {
       addIncomesBlock: function() {
         let cloneIncomeItem = incomeItemTemplete.cloneNode(true);
         
-        buttonIncomeAdd.before(cloneIncomeItem);
+        this.before(cloneIncomeItem);
 
         if (incomeItems.length === 3) {
-          buttonIncomeAdd.style.display = 'none';
+          this.style.display = 'none';
         }
       }, 
 
@@ -109,18 +110,18 @@ let appData = {
                         .filter((item, index) => {if(item[index] !== '') {
                           return item[index]} 
                         });
-        
-        appData.income = Object.fromEntries(items);
+                        
+        this.income = Object.fromEntries(items);
       },
       
       //Функция клонирует div.expenses-items по нажатию кнопки "+"
       addExpensesBlock: function() {
         let cloneExpensesItem = expensesItemTemplete.cloneNode(true);
         
-        buttonExpensesAdd.before(cloneExpensesItem);
+        this.before(cloneExpensesItem);
 
         if (expensesItems.length === 3) {
-          buttonExpensesAdd.style.display = 'none';
+          this.style.display = 'none';
         }
       },
 
@@ -167,7 +168,7 @@ let appData = {
       //Функция возвращает сумму всех обязательных расходов за месяц
       getExpensesMonth: function(expenses) {
         if (expenses.length !== 0) {
-          thisa.expensesMonth = expenses.reduce((accume, current) => accume + current);
+          this.expensesMonth = expenses.reduce((accume, current) => accume + current);
         }
         else {
           return this.expensesMonth = 0;
@@ -223,11 +224,23 @@ let appData = {
 buttonStart.addEventListener('click', function(e) {
   if (salaryAmount.value !== '') {
     appData.start();
+    console.log('this ', this);
+
+    document.querySelectorAll('input[type = text]').forEach(item => item.disabled = true);
+    buttonStart.style.display = 'none'; 
+    buttonCansel.style.display = 'block'; 
   }
   else {
     return alert ('Поле Месячный доход не должен быть пустым!');
   }
 });
+
+//Обработчик события "Сбросить"
+buttonCansel.addEventListener('click', function() {
+  document.querySelectorAll('input[type = text]').forEach(item => item.value = '');
+  buttonCansel.style.display = 'none'; 
+  buttonStart.style.display = 'block'; 
+})
 
 //Обработчик кнопки "Дополнительный доход Плюс"
 buttonIncomeAdd.addEventListener('click', appData.addIncomesBlock);
@@ -295,18 +308,18 @@ let inputName = document.querySelectorAll('input[placeholder = "Наименов
 
 inputName.forEach(item => {
   item.addEventListener('input', function(e) {
-    if ((e.target.value !== '') && (!isStr(e.target.value))) {
+    if ((this.value !== '') && (!isStr(this.value))) {
       alert ('В данном поле допустимы только буквы русского алфавита!');
-      e.target.value = e.target.value.replace(/[^а-яА-Я ,]+$/g, '')
+      this.value = this.value.replace(/[^а-яА-Я ,]+$/g, '')
     }
   })
 })
 
 inputAmount.forEach(item => {
   item.addEventListener('input', function(e) {
-    if ((e.target.value !== '') && (!isNumber(e.target.value))) {
+    if ((this.value !== '') && (!isNumber(this.value))) {
       alert ('В данном поле допустимы только цифры!');
-      e.target.value = e.target.value.replace(/[^\d]+$/g, '')
+      this.value = this.value.replace(/[^\d]+$/g, '')
     }
   })
 })
