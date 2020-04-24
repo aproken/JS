@@ -227,7 +227,8 @@ buttonStart.addEventListener('click', function(e) {
     console.log('this ', this);
 
     document.querySelectorAll('input[type = text]').forEach(item => item.disabled = true);
-    Object.values(buttonPlus).forEach(item => item.disabled = true);
+    buttonIncomeAdd.disabled = true;
+    buttonExpensesAdd.disabled = true;
     depositCheck.disabled = true;
     periodSelect.disabled = true;
     buttonStart.style.display = 'none'; 
@@ -254,6 +255,9 @@ buttonCansel.addEventListener('click', function() {
 
   Object.values(expensesItems).slice(1).forEach(item => item.remove());
   buttonExpensesAdd.style.display = 'block';
+
+  buttonIncomeAdd.disabled = false;
+  buttonExpensesAdd.disabled = false;
 })
 
 //Обработчик кнопки "Дополнительный доход Плюс"
