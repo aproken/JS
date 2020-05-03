@@ -90,7 +90,7 @@ class AppData {
     targetMonthValue.value = this.getTargetMonth();
     incomePeriodValue.value = this.calcSaveMoney();
 
-    periodSelect.addEventListener('input', function(e) {
+    periodSelect.addEventListener('input', (e) => {
       incomePeriodValue.value = e.target.value * self.budget;
     })
   }
@@ -234,23 +234,22 @@ class AppData {
 
   //Функция выдвет информацию сколько можно накопить за опрделенный период
   calcSaveMoney() {
-
     return this.budgetMonth * periodSelect.value;
   }
 
   //Функция слушателей
   eventsListeners() {
+    let self = this;
     //Обработчик кнопки "Расчитать"
-    buttonStart.addEventListener('click', function() {
+    buttonStart.addEventListener('click', () => {
       if (salaryAmount.value !== '') {
-        appData.start();
+        self.start();
         console.log('this ', this);
 
         document.querySelectorAll('input[type = text]').forEach(item => item.disabled = true);
         buttonIncomeAdd.disabled = true;
         buttonExpensesAdd.disabled = true;
         depositCheck.disabled = true;
-        // periodSelect.disabled = true;
         buttonStart.style.display = 'none'; 
         buttonCansel.style.display = 'block'; 
       }
@@ -260,7 +259,7 @@ class AppData {
     })
 
     //Обработчик события "Сбросить"
-    buttonCansel.addEventListener('click', function() {
+    buttonCansel.addEventListener('click', () => {
 
       document.querySelectorAll('input[type = text]').forEach(item => {
         item.value = '';
@@ -281,13 +280,13 @@ class AppData {
     })
 
     //Обработчик кнопки "Дополнительный доход Плюс"
-    buttonIncomeAdd.addEventListener('click', appData.addIncomesBlock);
+    buttonIncomeAdd.addEventListener('click', self.addIncomesBlock);
 
     //Обработчик кнопки "Обязательные расходы Плюс"
-    buttonExpensesAdd.addEventListener('click', appData.addExpensesBlock);
+    buttonExpensesAdd.addEventListener('click', self.addExpensesBlock);
 
     //Обработчик для отслеживания периода
-    periodSelect.addEventListener('input', function(e) {
+    periodSelect.addEventListener('input', (e) => {
       periodAmount.innerText = e.target.value;
     })
 
@@ -303,24 +302,20 @@ appData.eventsListeners();
 
 
 //Функция проверяет является цифрой
-function isNumber(n) {
-// return !isNaN(parseFloat(n)) && isFinite(n);
-  return Boolean(n.match(/^\d+$/)
-  )
-}
+const isNumber = (n) => Boolean(n.match(/^\d+$/))
 
 //Функция проверяет является буквой или нет
-function isStr(str) {
-let reg = /^[а-яА-Я ,]+$/;
-return reg.test(str)
+const isStr = (str) => {
+  let reg = /^[а-яА-Я ,]+$/;
+  return reg.test(str)
 }
 
 //Функция делает первую букву заглавной
-function ucFirst(str) {
-if (str === '') {
-return str;
-}
-return str[0].toUpperCase() + str.slice(1);
+const ucFirst = (str) => {
+  if (str === '') {
+    return str;
+  }
+  return str[0].toUpperCase() + str.slice(1);
 }
 
 //Функция валидации полей
@@ -328,7 +323,7 @@ const inputName = document.querySelectorAll('input[placeholder = "Наимено
     inputAmount = document.querySelectorAll('input[placeholder = "Сумма"]');
 
 inputName.forEach(item => {
-  item.addEventListener('input', function(e) {
+  item.addEventListener('input', () => {
     if ((this.value !== '') && (!isStr(this.value))) {
       alert ('В данном поле допустимы только буквы русского алфавита!');
       this.value = this.value.replace(/[^а-яА-Я ,]+$/g, '')
@@ -337,7 +332,7 @@ inputName.forEach(item => {
 })
 
 inputAmount.forEach(item => {
-  item.addEventListener('input', function(e) {
+  item.addEventListener('input', () => {
     if ((this.value !== '') && (!isNumber(this.value))) {
       alert ('В данном поле допустимы только цифры!');
       this.value = this.value.replace(/[^\d]+$/g, '')
