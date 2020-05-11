@@ -335,6 +335,7 @@ class AppData {
 
       depositCheck.checked = false;
       depositCheck.disabled = false;
+      depositBank.disabled = false;
       depositBank.style.display = 'none';
       depositAmount.style.display = 'none';
 
