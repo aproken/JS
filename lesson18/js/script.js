@@ -33,26 +33,28 @@ let timeId;
         };
     }
 
-    const timer = getTimeRemaining();
+    const updateTimer = function() {
+      const timer = getTimeRemaining();
 
-    if ((timer.hours <= 0) && 
-        (timer.minutes <= 0) && 
-        (timer.seconds <= 0)) {
-      
-          clearInterval(timeId);
-        timerHours.textContent = '00';
-        timerMinutes.textContent = '00';
-        timerSeconds.textContent = '00';
+        if ((timer.hours <= 0) && 
+            (timer.minutes <= 0) && 
+            (timer.seconds <= 0)) {
+          
+              clearInterval(timeId);
+            timerHours.textContent = '00';
+            timerMinutes.textContent = '00';
+            timerSeconds.textContent = '00';
+        }
+        else {
+          timerHours.textContent = addZero(timer.hours);
+          timerMinutes.textContent = addZero(timer.minutes);
+          timerSeconds.textContent = addZero(timer.seconds);
+        }
+        
+      }
+      updateTimer();
+      timeId = setInterval(updateTimer, 1000);
     }
-    else {
-      timerHours.textContent = addZero(timer.hours);
-      timerMinutes.textContent = addZero(timer.minutes);
-      timerSeconds.textContent = addZero(timer.seconds);
-    }
-    
-  }
   
-  countTimer('10 may 2020');
-  timeId = setInterval(countTimer, 1000, '10 may 2020');
-
+  countTimer('19 may 2020');
 });
