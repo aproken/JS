@@ -4,14 +4,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
 let timeId;
 
-  function addZero(item) {
+  const addZero = (item) => {
     if (Math.floor(item / 10) === 0) {
       return '0' + item;
     } else { return item; }
   }
 
   //Таймер
-  function countTimer(deadline) {
+  const countTimer = (deadline) => {
     const timerHours = document.getElementById('timer-hours'),
       timerMinutes = document.getElementById('timer-minutes'),
       timerSeconds = document.getElementById('timer-seconds');
@@ -33,7 +33,7 @@ let timeId;
         };
     }
 
-    const updateTimer = function() {
+    const updateTimer = () => {
       const timer = getTimeRemaining();
 
         if ((timer.hours <= 0) && 
@@ -57,4 +57,30 @@ let timeId;
     }
   
   countTimer('19 may 2020');
+
+  // Меню
+  const toggleMenu = () => {
+    const btnMenu = document.querySelector('.menu'),
+      menu = document.querySelector('menu'),
+      btnClose = document.querySelector('.close-btn'),
+      menuItems = menu.querySelectorAll('ul>li');
+
+      const menuHandler = () => {
+        if (menu.style.transform !== 'none') {
+          menu.style.transform = 'none';
+        }
+        else {
+          menu.style.transform = 'translateX(-100%)';
+        }
+      }
+
+    btnMenu.addEventListener('click', menuHandler);
+
+    btnClose.addEventListener('click', menuHandler);
+  
+    menuItems.forEach((item) => {
+      item.addEventListener('click', menuHandler)
+    })
+  }
+  toggleMenu();
 });
