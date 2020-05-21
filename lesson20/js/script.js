@@ -72,21 +72,26 @@ let timeId;
   // Меню
   const toggleMenu = () => {
     const btnMenu = document.querySelector('.menu'),
-      menu = document.querySelector('menu'),
-      btnClose = document.querySelector('.close-btn'),
-      menuItems = menu.querySelectorAll('ul>li');
+      menu = document.querySelector('menu');
 
-      const menuHandler = () => {
-        menu.classList.toggle('active-menu');
+    const menuHandler = () => {
+      menu.classList.toggle('active-menu');
+    }
+    
+    menu.addEventListener('click', (e) => {
+      let target = e.target;
+
+      if(target.classList.contains('close-btn')) {
+        menuHandler();
       }
 
-    btnMenu.addEventListener('click', menuHandler);
-
-    btnClose.addEventListener('click', menuHandler);
-  
-    menuItems.forEach((item) => {
-      item.addEventListener('click', menuHandler)
+      // Если это ссылка то закрываем меню
+      if(target.tagName == 'A') {
+        menuHandler();
+      }
     })
+    
+    btnMenu.addEventListener('click', menuHandler);
   }
 
   toggleMenu();
@@ -96,7 +101,6 @@ let timeId;
     const popUp = document.querySelector('.popup'),
       popUpContent = document.querySelector('.popup-content'),
       screenSize = document.documentElement.clientWidth,
-      btnPopUpClose = document.querySelector('.popup-close'),
       btnPopUp = document.querySelectorAll('.popup-btn');
 
       btnPopUp.forEach((e) => {
@@ -125,8 +129,19 @@ let timeId;
         })
       })
 
-      btnPopUpClose.addEventListener('click', () => {
-        popUp.style.display = 'none';
+      popUp.addEventListener('click', (e) => {
+        let target = e.target;
+
+        if (target.classList.contains('popup-close')) {
+          popUp.style.display = 'none';
+        }
+        else {
+          target = target.closest('.popup-content');
+
+          if (!target) {
+            popUp.style.display = 'none'; 
+          }
+        } 
       })
   }
 
@@ -179,13 +194,12 @@ let timeId;
       }
     }
 
-
     tabsHeader.addEventListener('click', (e) => {
       let target = e.target;
+     
+      target = target.closest('.service-header-tab');
 
-      while (target !== tabsHeader) {
-
-        if (target.classList.contains('service-header-tab')) {
+        if (target) {
           
           tab.forEach((item, index) => {
 
@@ -194,10 +208,8 @@ let timeId;
             }
 
           })
-          return;
-        }
-        target = target.parentNode;
-      }
+        }    
+
     })
   }
 
