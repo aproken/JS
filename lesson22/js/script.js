@@ -339,5 +339,25 @@ let timeId;
     })
   })
 
+  //Функция проверяет является цифрой
+  const isNumber = (n) => Boolean(n.match(/^\d+$/));
+
+  //Валидация полей
+  const inputNumber = [],
+    inputSquare = document.querySelector('.calc-square'),
+    inputCount = document.querySelector('.calc-count'),
+    inputDay = document.querySelector('.calc-day');
+
+  inputNumber.push(inputSquare, inputCount, inputDay);
+
+  inputNumber.forEach(item => {
+    item.addEventListener('input', () => {
+    if ((item.value == '') || (!isNumber(item.value))) {
+      alert ('В данном поле допустимы только цифры!');
+      item.value = item.value.replace(/[^\d]+$/g, '')
+    }
+    })
+  })
+
 
 });
