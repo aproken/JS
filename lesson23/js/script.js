@@ -392,7 +392,7 @@ let timeId;
         total = price * typeValue * squareValue * countValue * dayValue;
       } 
 
-      totalValue.textContent = total;
+      randerSum(totalValue, total);
     }
 
     calcBlock.addEventListener('change', (e) => {
@@ -409,7 +409,6 @@ let timeId;
       if (target.matches('select') || target.matches('input')) {
         countSum();
       }
-
 
     })
   
@@ -429,8 +428,31 @@ let timeId;
     })
     //конец валидация полей
 
+    //Эффект анимации 
 
+    const randerSum = (elem, newValue) => {
+      console.log("from", parseInt(elem.textContent));
+      console.log("to", newValue);
 
+      let currentValue = parseInt(elem.textContent),
+          stepCount = 15,
+          timer;
+      
+      const inner = () => {
+        let range = newValue - currentValue,
+            step = Math.floor(range / stepCount);
+
+        currentValue = currentValue + step;
+        stepCount--;
+
+        elem.textContent = currentValue;
+        if (currentValue == newValue) {
+          clearInterval(timer);
+        }
+      }
+        
+      timer = setInterval(inner, 10);
+    }
   }
 
   calcuculator(100);
