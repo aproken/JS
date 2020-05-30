@@ -29,7 +29,26 @@
 
   </section>
 
-  <script src="./maskPhone.js"></script>
+  <!--<script src="./maskPhone.js"></script>-->
+  <script src="./validator.js"></script>
+  <script>
+    const valid = new Validator ({
+      selector: '#myForm',
+      pattern: {},
+      method: {
+        'phone': [
+          ['notEmpty'],
+          ['pattern', 'phone']
+        ],
+        'email': [
+          ['notEmpty'],
+          ['pattern', 'email']
+        ]
+      }
+    })
+
+    valid.init();
+  </script>
   <script src="./js/script.js"></script>
 </body>
 </html>
