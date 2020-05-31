@@ -1,0 +1,47 @@
+.status-message {
+  font-size: 2rem;
+}
+
+.status-message.loading {
+  /* background-image: url('../images/spiner.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center; */
+    width: 2em;
+    height: 2em;
+    margin: auto;
+    background-color: #337ab7;
+    -webkit-animation: sk-rotating-plane 1.2s infinite ease-in-out;
+            animation: sk-rotating-plane 1.2s infinite ease-in-out;
+
+}
+
+@-webkit-keyframes sk-rotating-plane {
+  0% {
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
+
+@keyframes sk-rotating-plane {
+  0% {
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
