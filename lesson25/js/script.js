@@ -571,6 +571,7 @@ let timeId;
 
   workForm(document.getElementById('form1'));
   workForm(document.getElementById('form2'));
+  workForm(document.getElementById('form3'));
 
 
 });
