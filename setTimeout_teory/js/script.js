@@ -1,19 +1,28 @@
 'use strict'
 
-let drop = document.querySelector('.drop'),
-      count = 0;
+let animateId,
+   count = 0,
+   drop = document.querySelector('.drop'),
+   startBtn = document.querySelector("#start"),
+   stopBtn = document.querySelector("#stop");
 
-let dropDown = function() {
+function render() {
   count++;
   
   if (count < 350) {
     drop.style.top = count + 'px';
-    setTimeout(dropDown, 10);
     console.log(count);
   }
   else {
-    clearTimeout(timeId);
+    cancelAnimationFrame(animateId);
   }
+  animateId = requestAnimationFrame(render);
 }
 
-let timeId = setTimeout(dropDown, 10);
+startBtn.addEventListener("click", function() {
+  animateId = requestAnimationFrame(render);
+});
+
+stopBtn.addEventListener("click", function() {
+  cancelAnimationFrame(animateId);
+});
