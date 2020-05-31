@@ -67,7 +67,10 @@ let timeId;
       timeId = setInterval(updateTimer, 1000);
     }
   
-  countTimer('30 may 2020');
+  let tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate()+1);
+  tomorrow.setHours(0,0,0);
+  countTimer(tomorrow);
 
   // Меню
   const toggleMenu = () => {
