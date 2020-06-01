@@ -1,3 +1,5 @@
+let timeId;
+
 const togglePopUp = () => {
   const popUp = document.querySelector('.popup'),
     popUpContent = document.querySelector('.popup-content'),
@@ -24,6 +26,8 @@ const togglePopUp = () => {
         }
         if (screenSize > 768) {
           timeId = setTimeout(movePopUpContent, 15);
+        } else {
+          clearTimeout(timeId);
         }
         //Конец анимация
 
@@ -46,4 +50,5 @@ const togglePopUp = () => {
     })
 }
 
-export default togglePopUp;
+export default togglePopUp
+;
