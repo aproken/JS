@@ -38,14 +38,6 @@ const calculator = (price = 100) => {
   calcBlock.addEventListener('change', (e) => {
     const target = e.target;
 
-    // if (target.matches('.calc-type') || target.matches('.calc-square') || target.matches('.calc-day') || target.matches('.calc-count')) {
-    //   console.log(1);
-    // }
-
-    // if (target === calcType || target === calcSquare || target === calcCount || target === calcDay) {
-    //   console.log(1);
-    // }
-
     if (target.matches('select') || target.matches('input')) {
       countSum();
     }
@@ -71,8 +63,6 @@ const calculator = (price = 100) => {
   //Эффект анимации 
 
   const randerSum = (elem, newValue) => {
-    console.log("from", parseInt(elem.textContent));
-    console.log("to", newValue);
 
     let currentValue = parseInt(elem.textContent),
         stepCount = 15,
