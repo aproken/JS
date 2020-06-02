@@ -39,12 +39,14 @@ const togglePopUp = () => {
 
       if (target.classList.contains('popup-close')) {
         popUp.style.display = 'none';
+        popUpContent.style.left = '0%';
       }
       else {
         target = target.closest('.popup-content');
 
         if (!target) {
           popUp.style.display = 'none'; 
+          popUpContent.style.left = '0%';
         }
       } 
     })

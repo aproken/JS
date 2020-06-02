@@ -32,7 +32,7 @@ const calculator = (price = 100) => {
       total = price * typeValue * squareValue * countValue * dayValue;
     } 
 
-    randerSum(totalValue, total);
+    randerSum(totalValue, Math.round(total));
   }
 
   calcBlock.addEventListener('change', (e) => {
@@ -75,9 +75,11 @@ const calculator = (price = 100) => {
       currentValue = currentValue + step;
       stepCount--;
 
-      elem.textContent = currentValue;
-      if (currentValue == newValue) {
+      if (stepCount > 0) {
+        elem.textContent = currentValue;
+      } else {
         clearInterval(timer);
+        elem.textContent = newValue;
       }
     }
       

@@ -75,11 +75,11 @@ const workForm = (form) => {
 
   if (messageForm) {
     messageForm.setAttribute('autocomplete', 'off');
-    messageForm.pattern = '^[а-яА-Я\\s]+$';
+    messageForm.pattern = '^[а-яА-Я\\s,\\.!?\\-\\(\\)"\']+$';
 
     messageForm.addEventListener('invalid', (e) => {
       e.target.style.border = '1px solid red';
-      e.target.setCustomValidity("Имя может содержать только кирилические символы");
+      e.target.setCustomValidity("Сообщение может содержать только кирилические символы");
     });
 
     messageForm.addEventListener('input', (e) => {

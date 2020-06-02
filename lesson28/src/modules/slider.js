@@ -22,7 +22,7 @@ const slider = () => {
   const nextSlide = (elem, index, strClass) => {
     elem[index].classList.add(strClass);
   }
-
+  
   const autoPlaySlide = () => {
 
     prevSlide(slide, currentSlide, 'portfolio-item-active');
@@ -44,6 +44,9 @@ const slider = () => {
   const stopSlide = () => {
     clearInterval(interval);
   }
+
+  // выставляем слайд по умолчанию при запуске
+  nextSlide(dot, 0, 'dot-active');
 
   slider.addEventListener('click', (e) => {
     e.preventDefault();
