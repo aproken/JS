@@ -22,15 +22,18 @@ let timeId;
   }
 
   //Таймер
-  const countTimer = (deadline) => {
+  const countTimer = () => {
     const timerHours = document.getElementById('timer-hours'),
       timerMinutes = document.getElementById('timer-minutes'),
       timerSeconds = document.getElementById('timer-seconds');
 
     function getTimeRemaining() {
-      const dateStop = new Date(deadline).getTime(),
-        dateNow = new Date().getTime(),
-        timeRemaining = (dateStop - dateNow) / 1000,
+      const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate()+1);
+            tomorrow.setHours(0,0,0);
+
+      const dateNow = new Date().getTime(),
+            timeRemaining = (tomorrow - dateNow) / 1000,
         
         seconds = Math.floor(timeRemaining % 60),
         minutes = Math.floor((timeRemaining / 60) % 60),
@@ -64,13 +67,10 @@ let timeId;
         
       }
       updateTimer();
-      timeId = setInterval(updateTimer, 1000);
+      timeId = setInterval(updateTimer, 300);
     }
   
-  let tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate()+1);
-  tomorrow.setHours(0,0,0);
-  countTimer(tomorrow);
+  countTimer();
 
   // Меню
   const toggleMenu = () => {
