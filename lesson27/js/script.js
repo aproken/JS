@@ -18,7 +18,7 @@ let timeId;
   const addZero = (item) => {
     if (Math.floor(item / 10) === 0) {
       return '0' + item;
-    } else { return item; }
+    } else { return item.toString(); }
   }
 
   //Таймер
@@ -49,26 +49,17 @@ let timeId;
 
     const updateTimer = () => {
       const timer = getTimeRemaining();
-
-        if ((timer.hours <= 0) && 
-            (timer.minutes <= 0) && 
-            (timer.seconds <= 0)) {
-          
-              clearInterval(timeId);
-            timerHours.textContent = '00';
-            timerMinutes.textContent = '00';
-            timerSeconds.textContent = '00';
-        }
-        else {
-          timerHours.textContent = addZero(timer.hours);
-          timerMinutes.textContent = addZero(timer.minutes);
-          timerSeconds.textContent = addZero(timer.seconds);
-        }
-        
+      let hours = addZero(timer.hours);
+      if (hours === '24') {
+        hours = '00';
       }
-      updateTimer();
-      timeId = setInterval(updateTimer, 1000);
+      timerHours.textContent = hours;
+      timerMinutes.textContent = addZero(timer.minutes);
+      timerSeconds.textContent = addZero(timer.seconds);
     }
+    updateTimer();
+    timeId = setInterval(updateTimer, 1000);
+  }
   
   countTimer();
 
