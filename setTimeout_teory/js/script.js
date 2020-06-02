@@ -3,13 +3,13 @@
 let animateId,
    count = 0,
    drop = document.querySelector('.drop'),
-   startBtn = document.querySelector("#start"),
-   stopBtn = document.querySelector("#stop");
+   playBtn = document.getElementById("play"),
+   resetBtn = document.getElementById("reset");
 
 function render() {
   count++;
   
-  if (count < 350) {
+  if (count < 1000) {
     drop.style.top = count + 'px';
     console.log(count);
   }
@@ -19,10 +19,17 @@ function render() {
   animateId = requestAnimationFrame(render);
 }
 
-startBtn.addEventListener("click", function() {
-  animateId = requestAnimationFrame(render);
+playBtn.addEventListener('click', function() {
+  
+  if (animateId) {
+    cancelAnimationFrame(animateId);
+    animateId = null;
+  } else {
+    animateId = requestAnimationFrame(render);
+  }
 });
 
-stopBtn.addEventListener("click", function() {
-  cancelAnimationFrame(animateId);
+resetBtn.addEventListener('click', function() {
+  count = 0;
+  drop.style.top = count + 'px';
 });
