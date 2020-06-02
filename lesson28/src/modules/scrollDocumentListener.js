@@ -8,6 +8,7 @@ scrollUp.style.position = 'fixed';
 scrollUp.style.right = '50px';
 scrollUp.style.bottom = '45px'
 scrollUp.style.zIndex = '9';
+scrollUp.style.cursor = 'pointer';
 
 const scrollDocumentListener = () => {
   

@@ -3,8 +3,13 @@ let timeId;
 const togglePopUp = () => {
   const popUp = document.querySelector('.popup'),
     popUpContent = document.querySelector('.popup-content'),
-    screenSize = document.documentElement.clientWidth,
     btnPopUp = document.querySelectorAll('.popup-btn');
+  
+    let screenSize = document.documentElement.clientWidth;
+
+    window.addEventListener('resize', (e) => {
+      screenSize = document.documentElement.clientWidth;
+    });
 
     btnPopUp.forEach((e) => {
       e.addEventListener('click', () => {
@@ -24,6 +29,7 @@ const togglePopUp = () => {
             clearTimeout(timeId);
           }
         }
+        
         if (screenSize > 768) {
           timeId = setTimeout(movePopUpContent, 15);
         } else {
